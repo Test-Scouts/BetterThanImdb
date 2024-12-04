@@ -3,8 +3,8 @@ As part of Mert's mentorship program with Francisco, this repository serves both
 
 ## Requirements
 
-1. The system shall show movies and ratings. [F]
-2. The system shall allow selecting genres. [F]
+1. The system shall show movies and ratings.
+2. The system shall allow selecting genres.
 3. The system shall show/plot reviews for those movies over years.
 4. The system shall have an appealing and modern UI.
 5. The system shall recommend great movives.
