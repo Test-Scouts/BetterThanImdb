@@ -1,22 +1,22 @@
 # BetterThanImdb
-As part of Mert's mentorship program with Francisco, this repository serves both as a playground and one of the deliverables.
+As part of Mert's mentorship program with Dr. Francisco, this repository serves both as a playground and one of the deliverables.
 
 ## Requirements
 
 1. The system shall show movies and ratings.
 2. The system shall allow selecting genres.
-3. The system shall show/plot reviews for those movies over years.
+3. The system shall show and plot reviews for those movies over years.
 4. The system shall have an appealing and modern UI.
 5. The system shall recommend great movives.
-6. The system shall recommend quick enough so that user is not bored.
-7. The system shall show me famous quotes from the movie.
-8. The system shallshow on which platform one can watch the movies.
-9. The system shall show pages with interesting fact about the movie
+6. The system shall recommend quickly enough so that user is not bored.
+7. The system shall show user famous quotes from the movie.
+8. The system shall show on which platform one can watch the movies.
+9. The system shall show pages with interesting fact about the movie.
 10. The system shall have a dynamic UI.
-11. The system shall tell me of interestingand upcoming movies.
+11. The system shall tell user of interesting and upcoming movies.
 12. The system shall greet any users i.e. "Hey Gorgeous!".
-13. The system shallshall show gossips & news about movies.
-14. The system shall support any language.
+13. The system shall show gossips & news about movies.
+14. The system shall support all languages.
 15. The system shall play the trailors for the movie.
 
 ## Priority Levels of the Requirements
