@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./components/Header";
 
 function App() {
-  const appName: String = "BetterThanIMDB";
+  const appName: string = "BetterThanIMDB";
 
   return (
     <>
