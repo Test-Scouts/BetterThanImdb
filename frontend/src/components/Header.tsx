@@ -1,9 +1,15 @@
+import styles from "./Header.module.css";
+
 interface Props {
-  appName: String;
+  appName: string;
 }
 
 function Header({ appName }: Props) {
-  return <h1>{appName}</h1>;
+  return (
+    <header className={styles.header}>
+      <h1 className={styles.title}>{appName}</h1>
+    </header>
+  );
 }
 
 export default Header;
