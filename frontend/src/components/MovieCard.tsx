@@ -8,13 +8,13 @@ function MovieCard({ movieName, movieRating, streamingPlatforms }: Props) {
   return (
     <div>
       <p>
-        {movieName}.{" "}
+        {movieName}{" "}
         <button type="button" disabled>
           {movieRating}
         </button>
       </p>
       {streamingPlatforms.map((item) => (
-        <li>{item}</li>
+        <span>{item} </span>
       ))}
     </div>
   );
