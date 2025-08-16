@@ -17,11 +17,11 @@ function App() {
     {
       movieName: "Pulp Fiction",
       rating: 8.8,
-      streamingPlatforms: ["AmazonPrime"],
+      streamingPlatforms: ["Amazon Prime"],
     },
     { movieName: "Forrest Gump", rating: 8.8, streamingPlatforms: ["Netflix"] },
     { movieName: "Inception", rating: 7.7, streamingPlatforms: ["Netflix"] },
-    { movieName: "Se7en", rating: 8.8, streamingPlatforms: ["AmazonPrime"] },
+    { movieName: "Se7en", rating: 8.8, streamingPlatforms: ["Amazon Prime"] },
     { movieName: "The Matrix", rating: 9.8, streamingPlatforms: ["Netflix"] },
   ];
 
