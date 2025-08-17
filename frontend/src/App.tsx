@@ -6,15 +6,15 @@ function App() {
   const appName: string = "BetterThanIMDB";
 
   const movies = [
-    { movieName: "The Dark Knight", rating: 9.5, streamingPlatforms: ["Netflix", "Disney+", "Amazon Prime"] },
-    { movieName: "Interstellar", rating: 9.0, streamingPlatforms: ["Netflix"] },
-    { movieName: "Inside Out", rating: 8.5, streamingPlatforms: ["Disney+"] },
-    { movieName: "Titanic", rating: 7.5, streamingPlatforms: ["Netflix"] },
-    { movieName: "Pulp Fiction", rating: 8.8, streamingPlatforms: ["Amazon Prime"] },
-    { movieName: "Forrest Gump", rating: 8.8, streamingPlatforms: ["Netflix"] },
-    { movieName: "Inception", rating: 7.7, streamingPlatforms: ["Netflix"] },
-    { movieName: "Se7en", rating: 8.8, streamingPlatforms: ["Amazon Prime"] },
-    { movieName: "The Matrix", rating: 9.8, streamingPlatforms: ["Netflix"] },
+    { movieName: "The Dark Knight", movieRating: 9.5, streamingPlatforms: ["Netflix", "Disney+", "Amazon Prime"] },
+    { movieName: "Interstellar", movieRating: 9.0, streamingPlatforms: ["Netflix"] },
+    { movieName: "Inside Out", movieRating: 8.5, streamingPlatforms: ["Disney+"] },
+    { movieName: "Titanic", movieRating: 7.5, streamingPlatforms: ["Netflix"] },
+    { movieName: "Pulp Fiction", movieRating: 8.8, streamingPlatforms: ["Amazon Prime"] },
+    { movieName: "Forrest Gump", movieRating: 8.8, streamingPlatforms: ["Netflix"] },
+    { movieName: "Inception", movieRating: 7.7, streamingPlatforms: ["Netflix"] },
+    { movieName: "Se7en", movieRating: 8.8, streamingPlatforms: ["Amazon Prime"] },
+    { movieName: "The Matrix", movieRating: 9.8, streamingPlatforms: ["Netflix"] },
   ];
 
   const renderMovieCards = () => {
@@ -22,7 +22,7 @@ function App() {
       <MovieCard
         key={index}
         movieName={movie.movieName}
-        movieRating={movie.rating}
+        movieRating={movie.movieRating}
         streamingPlatforms={movie.streamingPlatforms}
       />
     ));
