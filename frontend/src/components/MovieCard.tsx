@@ -1,7 +1,7 @@
-import netflixLogo from "c:\\Users\\MertYurdakul\\Desktop\\BetterThanImdb\\frontend\\public\\netflix_logo.jpg";
-import amazonPrimeLogo from "c:\\Users\\MertYurdakul\\Desktop\\BetterThanImdb\\frontend\\public\\amazon_prime_logo.jpg";
-import hboLogo from "c:\\Users\\MertYurdakul\\Desktop\\BetterThanImdb\\frontend\\public\\hbo_logo.jpg";
-import disneyLogo from "C:\\Users\\MertYurdakul\\Desktop\\BetterThanImdb\\frontend\\public\\disney_logo.jpg";
+import netflixLogo from "/netflix_logo.jpg";
+import amazonPrimeLogo from "/amazon_prime_logo.jpg";
+import hboLogo from "/hbo_logo.jpg";
+import disneyLogo from "/disney_logo.jpg";
 
 interface Props {
   movieName: string;
