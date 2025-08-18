@@ -1,6 +1,9 @@
 import "./App.css";
 import Header from "./components/Header";
 import MovieCard from "./components/MovieCard";
+import MovieFilter from "./components/MovieFilter";
+import { Movie } from "./types/Movie";
+import { useState } from "react";
 
 function App() {
   const appName: string = "BetterThanIMDB";
@@ -17,8 +20,10 @@ function App() {
     { movieName: "The Matrix", movieRating: 9.8, streamingPlatforms: ["Netflix"] },
   ];
 
-  const renderMovieCards = () => {
-    return movies.map((movie, index) => (
+  const [filteredMovies, setFilteredMovies] = useState(movies)
+
+  const renderMovieCards = (moviesToRender: Movie[]) => {
+    return moviesToRender.map((movie, index) => (
       <MovieCard
         key={index}
         movieName={movie.movieName}
@@ -31,7 +36,8 @@ function App() {
   return (
     <>
       <Header appName={appName} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">{renderMovieCards()}</div>
+      <MovieFilter movieList={movies} onFilter={setFilteredMovies} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">{renderMovieCards(filteredMovies)}</div>
     </>
   );
 }
