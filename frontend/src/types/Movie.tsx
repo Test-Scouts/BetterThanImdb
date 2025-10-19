@@ -1,4 +1,5 @@
 export interface Movie {
     movieName: string,
-    movieRating: number;
+    movieRating: number,
+    genres: Array<string>;
 }
