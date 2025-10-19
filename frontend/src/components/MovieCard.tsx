@@ -1,15 +1,30 @@
 interface Props {
   movieName: string;
   movieRating: number;
+  genres: Array<string>;
 }
 
-function MovieCard({ movieName, movieRating }: Props) {
+function MovieCard({ movieName, movieRating, genres }: Props) {
   return (
     <div className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
       <h3 className="text-lg font-semibold mb-3 pr-2">{movieName}</h3>
 
       {/* Spacer div to push content to bottom */}
       <div className="flex-grow"></div>
+      
+      {/* Genres */}
+      <div className="mb-3">
+        <div className="flex flex-wrap gap-1">
+          {genres.map((genre,index) => (
+            <span
+            key={index}
+            className="px-2 py-1 bg-gray-100 text-gray-700 text-ts rounded-full"
+            >
+              {genre}
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/*Star Ratings*/}
       <div className="flex items-center justify-end gap-1 mt-auto">

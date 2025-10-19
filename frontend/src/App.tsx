@@ -12,14 +12,15 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
   // The function that transforms JSON type data to MovieCard
-  const JsonToMovie = (apiData :any): Movie[] => {
+  const jsonToMovie = (apiData :any): Movie[] => {
     
     // API Data is empty
     if (!apiData) return [];
     
     return apiData.titles.map((item: any) => ({
       movieName: item.primaryTitle,
-      movieRating: item.rating?.aggregateRating || 0 }));
+      movieRating: item.rating?.aggregateRating || 0,
+      genres: item.genres || []}));
   };
 
   useEffect(() => {
@@ -29,7 +30,7 @@ function App() {
         const apiResponseJson = await apiResponse.json();                               // Parsing the response body as JSON
         console.log("raw api data:", apiResponseJson)
         console.log("first movie: ", apiResponseJson.titles?.[0])
-        const transformedMovieData = JsonToMovie(apiResponseJson);                      // Transform data from JSON to Movie type               
+        const transformedMovieData = jsonToMovie(apiResponseJson);                      // Transform data from JSON to Movie type               
         console.log("Transformed data:", transformedMovieData); 
         setMovies(transformedMovieData);                                                // Set variable "movies"                  
       }
@@ -48,6 +49,7 @@ function App() {
         key={index}
         movieName={movie.movieName}
         movieRating={movie.movieRating}
+        genres={movie.genres}
       />
     ));
   };
