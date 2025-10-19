@@ -21,10 +21,10 @@ As part of Mert's mentorship program with Dr. Francisco, this repository serves 
 
 ## Priority Levels of the Requirements
 
-| Requirement ID | Priority |
-| --- | --- |
-| RQ1 | First |
-| RQ2 | First |
+| Requirement ID | Priority | Implementation Status | 
+| --- | --- | --- | 
+| RQ1 | First | Done |
+| RQ2 | First | Done |
 | RQ3 | Mid-Term  |
 | RQ4 | First |
 | RQ5 | Long-Term |
@@ -32,7 +32,7 @@ As part of Mert's mentorship program with Dr. Francisco, this repository serves 
 | RQ7 | Mid-Term |
 | RQ8 | First |
 | RQ9 | Mid-Term |
-| RQ10 | First |
+| RQ10 | First | Done |
 | RQ11 | Mid-Term |
 | RQ12 | First |
 | RQ13 | Long-Term |
