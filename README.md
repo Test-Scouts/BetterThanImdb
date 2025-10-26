@@ -26,7 +26,7 @@ As part of Mert's mentorship program with Dr. Francisco, this repository serves 
 | RQ1 | First | Done |
 | RQ2 | First | Done |
 | RQ3 | Mid-Term  |
-| RQ4 | First |
+| RQ4 | First | Done |
 | RQ5 | Long-Term |
 | RQ6 | Long-Term |
 | RQ7 | Mid-Term |
