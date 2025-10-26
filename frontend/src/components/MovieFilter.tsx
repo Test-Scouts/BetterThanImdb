@@ -88,7 +88,7 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                         placeholder="Enter movie name..."
                         value={searchTitleKeyword}
                         onChange={(e) => setSearchTitleKeyword(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4"
+                        className="w-full px-3 py-2 border border-violet-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-250 focus:border-transparent mb-4"
                     />
 
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -99,7 +99,7 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                         placeholder="Enter genre..."
                         value={searchGenreKeyword}
                         onChange={(e) => setSearchGenreKeyword(e.target.value)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-violet-800 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-250 focus:border-transparent"
                     />
                 </div>
 
@@ -126,7 +126,10 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                                     setRatingRange(prev => ({...prev, min: newMin}));
                                 }
                             }}
-                            className="w-full"
+                            className="w-full accent-purple-950"
+                            style={{
+                                background: `violet-650`
+                            }}
                         />
                     </div>
                     
@@ -147,7 +150,10 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                                     setRatingRange(prev => ({...prev, max: newMax}));
                                 }
                             }}
-                            className="w-full"
+                            className="w-full accent-purple-950"
+                            style={{
+                                background: `violet-650`
+                            }}
                         />
                     </div>
                     
@@ -165,7 +171,7 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                     <select
                         value={sortingsOptions}
                         onChange={(e) => setsortingsOptions(e.target.value as sortingsOptions)}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-2 border border-violet-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
                         <option value="none">No Sorting</option>
                         <option value="rating-asc">Ascending (Low to High)</option>
