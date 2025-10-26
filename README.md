@@ -34,7 +34,7 @@ As part of Mert's mentorship program with Dr. Francisco, this repository serves 
 | RQ9 | Mid-Term |
 | RQ10 | First | Done |
 | RQ11 | Mid-Term |
-| RQ12 | First |
+| RQ12 | First | Done |
 | RQ13 | Long-Term |
 | RQ14 | Mid-Term |
 | RQ15 | Long-Term |
