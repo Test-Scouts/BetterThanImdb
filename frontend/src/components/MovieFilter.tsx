@@ -166,7 +166,7 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                 {/* Sort Options */}
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Sort By
+                        Sort By Rating
                     </label>
                     <select
                         value={sortingsOptions}
