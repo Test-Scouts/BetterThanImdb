@@ -128,7 +128,7 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                             }}
                             className="w-full accent-purple-950"
                             style={{
-                                background: `violet-650`
+                                background: `linear-gradient(to right, rgb(88 28 135) 0%, rgb(88 28 135) ${(ratingRange.min / 10) * 100}%, rgb(229 231 235) ${(ratingRange.min / 10) * 100}%, rgb(229 231 235) 100%)`
                             }}
                         />
                     </div>
@@ -152,7 +152,7 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                             }}
                             className="w-full accent-purple-950"
                             style={{
-                                background: `violet-650`
+                                background: `linear-gradient(to right, rgb(88 28 135) 0%, rgb(88 28 135) ${(ratingRange.max / 10) * 100}%, rgb(229 231 235) ${(ratingRange.max / 10) * 100}%, rgb(229 231 235) 100%)`
                             }}
                         />
                     </div>
@@ -166,7 +166,7 @@ function MovieFilter({movieList, onFilter }: Props & {onFilter: (filteredMovies:
                 {/* Sort Options */}
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Sort By
+                        Sort By Rating
                     </label>
                     <select
                         value={sortingsOptions}
