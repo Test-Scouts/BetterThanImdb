@@ -13,36 +13,118 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const moviesPerPage = 20; // Reduced to show pagination with fewer movies
+  const moviesPerPage = 50; // Reduced to show pagination with fewer movies
   
-  // The function that transforms JSON type data to MovieCard
-  const jsonToMovie = (apiData :any): Movie[] => {
+  // The function that transforms TMDb API JSON data to Movie type
+  const jsonToMovie = (apiData :any, genreMap: Map<number, string>): Movie[] => {
     
     // API Data is empty
-    if (!apiData) return [];
+    if (!apiData || !apiData.results) return [];
     
-    return apiData.titles.map((item: any) => ({
-      movieName: item.primaryTitle,
-      movieRating: item.rating?.aggregateRating || 0,
-      genres: item.genres || []}));
+    // TMDb API returns movies in a 'results' array
+    // Each movie has: title, vote_average (rating 0-10), genre_ids (array of genre IDs), poster_path
+    // We map genre IDs to genre names using the genreMap
+    // TMDb poster image base URL: https://image.tmdb.org/t/p/original/ (full resolution)
+    const posterBaseUrl = 'https://image.tmdb.org/t/p/original';
+    
+    return apiData.results.map((item: any) => ({
+      movieName: item.title || item.name || 'Unknown',
+      movieRating: item.vote_average 
+        ? Math.round(item.vote_average * 10) / 10  // Round to 1 decimal place (e.g., 7.436 → 7.4)
+        : 0, // TMDb ratings are 0-10 scale
+      genres: item.genre_ids 
+        ? item.genre_ids.map((id: number) => genreMap.get(id) || `Genre ${id}`).filter(Boolean)
+        : [], // Convert genre IDs to genre names
+      posterUrl: item.poster_path 
+        ? `${posterBaseUrl}${item.poster_path}` 
+        : '' // Construct full poster URL, or empty string if no poster available
+    }));
   };
 
   useEffect(() => {
     async function readApiData() {
       try {
-        const apiResponse = await fetch("https://api.imdbapi.dev/titles?types=MOVIE");  // Fetching data via API Call
-        const apiResponseJson = await apiResponse.json();                               // Parsing the response body as JSON
-        console.log("raw api data:", apiResponseJson)
-        console.log("Total movies from API:", apiResponseJson.titles?.length || 0)
-        console.log("first movie: ", apiResponseJson.titles?.[0])
-        const transformedMovieData = jsonToMovie(apiResponseJson);                      // Transform data from JSON to Movie type               
-        console.log("Transformed data:", transformedMovieData); 
-        console.log("Transformed data count:", transformedMovieData.length); 
+        // Read access token from environment variable
+        // In Vite, environment variables must be prefixed with VITE_ to be exposed to client
+        const accessToken = import.meta.env.VITE_TMDB_ACCESS_TOKEN;
+        
+        if (!accessToken || accessToken === '<<access_token>>') {
+          console.error('TMDb access token not found. Please set VITE_TMDB_ACCESS_TOKEN in your .env file');
+          return;
+        }
+
+        const headers = {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        };
+
+        // Step 1: Fetch genre list to create ID to name mapping
+        const genreResponse = await fetch('https://api.themoviedb.org/3/genre/movie/list', {
+          method: 'GET',
+          headers: headers
+        });
+
+        if (!genreResponse.ok) {
+          throw new Error(`Genre API Error: ${genreResponse.status} ${genreResponse.statusText}`);
+        }
+
+        const genreData = await genreResponse.json();
+        console.log("Genre data:", genreData);
+        
+        // Create a Map for fast genre ID to name lookup
+        const genreMap = new Map<number, string>();
+        if (genreData.genres && Array.isArray(genreData.genres)) {
+          genreData.genres.forEach((genre: { id: number; name: string }) => {
+            genreMap.set(genre.id, genre.name);
+          });
+        }
+        console.log("Genre map created with", genreMap.size, "genres");
+
+        // Step 2: Fetch popular movies from multiple pages
+        // TMDb API returns 20 movies per page, so we'll fetch multiple pages to get more movies
+        // Fetching pages 1-5 to get 100 movies
+        const pagesToFetch = 5; // Fetch 5 pages = 100 movies. Mind the rate limit of API provider.
+        const allMovies: any[] = [];
+        
+        // Fetch movies from multiple pages in parallel
+        const pagePromises = Array.from({ length: pagesToFetch }, (_, i) => {
+          const page = i + 1;
+          return fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}`, {
+            method: 'GET',
+            headers: headers
+          }).then(response => {
+            if (!response.ok) {
+              throw new Error(`Movies API Error for page ${page}: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+          });
+        });
+
+        const pageResults = await Promise.all(pagePromises);
+        
+        // Combine all movies from all pages
+        pageResults.forEach((pageData, index) => {
+          if (pageData.results && Array.isArray(pageData.results)) {
+            allMovies.push(...pageData.results);
+            console.log(`Page ${index + 1}: ${pageData.results.length} movies`);
+          }
+        });
+
+        console.log("Total movies fetched from all pages:", allMovies.length);
+        console.log("First movie:", allMovies[0]);
+        
+        // Create a mock API response structure for the transformation function
+        const combinedApiData = { results: allMovies };
+        
+        const transformedMovieData = jsonToMovie(combinedApiData, genreMap);           // Transform data from JSON to Movie type with genre mapping
+        console.log("Transformed data count:", transformedMovieData.length);
+        console.log("Sample movie with genres:", transformedMovieData[0]);
+        
         setMovies(transformedMovieData);                                                // Set variable "movies" 
         setFilteredMovies(transformedMovieData);                                        // Set variable "filteredMovies"        
       }
       catch(error){
-        console.error(error)
+        console.error("Error fetching movies from TMDb API:", error)
       }
     }
 
@@ -68,6 +150,7 @@ function App() {
         movieName={movie.movieName}
         movieRating={movie.movieRating}
         genres={movie.genres}
+        posterUrl={movie.posterUrl}
       />
     ));
   };
