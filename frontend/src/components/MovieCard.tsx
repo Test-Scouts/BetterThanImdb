@@ -2,15 +2,40 @@ interface Props {
   movieName: string;
   movieRating: number;
   genres: Array<string>;
+  posterUrl: string;
 }
 
-function MovieCard({ movieName, movieRating, genres }: Props) {
+function MovieCard({ movieName, movieRating, genres, posterUrl }: Props) {
   return (
-    <div className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
-      <h3 className="text-lg font-semibold mb-3 pr-2">{movieName}</h3>
+    <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
+      {/* Movie Poster */}
+      {posterUrl ? (
+        <div className="w-full bg-gray-200 overflow-hidden">
+          <img 
+            src={posterUrl} 
+            alt={movieName}
+            className="w-full h-full object-contain"
+            onError={(e) => {
+              // Fallback to placeholder if image fails to load
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              if (target.parentElement) {
+                target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-300 text-gray-500">No Image</div>';
+              }
+            }}
+          />
+        </div>
+      ) : (
+        <div className="w-full bg-gray-300 flex items-center justify-center text-gray-500">
+          No Image Available
+        </div>
+      )}
 
-      {/* Spacer div to push content to bottom */}
-      <div className="flex-grow"></div>
+      <div className="p-4 flex flex-col flex-grow">
+        <h3 className="text-lg font-semibold mb-3 pr-2">{movieName}</h3>
+
+        {/* Spacer div to push content to bottom */}
+        <div className="flex-grow"></div>
       
       {/* Genres */}
       <div className="mb-3">
@@ -38,6 +63,7 @@ function MovieCard({ movieName, movieRating, genres }: Props) {
         <span className="text-sm font-medium text-gray-700">
           {movieRating}
         </span>
+      </div>
       </div>
     </div>
   );
