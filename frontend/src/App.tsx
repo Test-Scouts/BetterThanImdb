@@ -22,8 +22,11 @@ function App() {
     if (!apiData || !apiData.results) return [];
     
     // TMDb API returns movies in a 'results' array
-    // Each movie has: title, vote_average (rating 0-10), genre_ids (array of genre IDs)
+    // Each movie has: title, vote_average (rating 0-10), genre_ids (array of genre IDs), poster_path
     // We map genre IDs to genre names using the genreMap
+    // TMDb poster image base URL: https://image.tmdb.org/t/p/original/ (full resolution)
+    const posterBaseUrl = 'https://image.tmdb.org/t/p/original';
+    
     return apiData.results.map((item: any) => ({
       movieName: item.title || item.name || 'Unknown',
       movieRating: item.vote_average 
@@ -31,7 +34,10 @@ function App() {
         : 0, // TMDb ratings are 0-10 scale
       genres: item.genre_ids 
         ? item.genre_ids.map((id: number) => genreMap.get(id) || `Genre ${id}`).filter(Boolean)
-        : [] // Convert genre IDs to genre names
+        : [], // Convert genre IDs to genre names
+      posterUrl: item.poster_path 
+        ? `${posterBaseUrl}${item.poster_path}` 
+        : '' // Construct full poster URL, or empty string if no poster available
     }));
   };
 
@@ -144,6 +150,7 @@ function App() {
         movieName={movie.movieName}
         movieRating={movie.movieRating}
         genres={movie.genres}
+        posterUrl={movie.posterUrl}
       />
     ));
   };
