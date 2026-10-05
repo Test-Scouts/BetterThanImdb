@@ -29,3 +29,6 @@ dist-ssr
 
 # Enviroment variables
 .env
+
+# Jest coverage output
+coverage
